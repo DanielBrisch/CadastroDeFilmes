@@ -17,7 +17,7 @@ class _loginPageState extends State<loginPage> {
             end: Alignment.bottomCenter,
             colors: [
               Colors.white,
-              Colors.blue,
+              Colors.deepPurpleAccent,
             ],
           ),
         ),
@@ -26,7 +26,7 @@ class _loginPageState extends State<loginPage> {
             width: 300.0,
             height: 470.0,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
@@ -38,50 +38,92 @@ class _loginPageState extends State<loginPage> {
               ],
             ),
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: Text(
-                      "LOGIN",
-                      style: TextStyle(
-                          fontSize: 50,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Text(
+                    "LOGIN",
+                    style: TextStyle(
+                        fontSize: 50,
+                        color: Colors.deepPurpleAccent,
+                        fontWeight: FontWeight.bold),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    child: SizedBox(
-                      width: 250,
-                      height: 50,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(13.0),
-                          ),
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(23, 0, 4, 5),
+                      child: Image.asset(
+                        "img/userIcon.jpg",
+                        width: 30.0,
+                        height: 30.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 5, right: 160),
+                      child: Text(
+                        "User",
+                        style: TextStyle(color: Colors.deepPurpleAccent),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: SizedBox(
+                    width: 250,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(13.0),
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                    child: SizedBox(
-                      width: 400,
-                      height: 50,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(13.0))),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  child: SizedBox(
+                    width: 400,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13.0))),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      shadowColor:
+                          MaterialStateProperty.all<Color>(Colors.black),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.deepPurpleAccent),
+                      elevation: MaterialStateProperty.all<double>(8.0),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      "Entrar",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
                       ),
                     ),
                   ),
-                ]),
+                ),
+                const Spacer(flex: 8),
+              ],
+            ),
           ),
         ),
       ),
