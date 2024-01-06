@@ -86,6 +86,19 @@ class _loginPageState extends State<loginPage> {
                     ),
                   ),
                 ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Image.asset(
+                        "img/padlock.jpg",
+                        width: 30.0,
+                        height: 30.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
