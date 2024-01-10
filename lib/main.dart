@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetofilmes/loginPage.dart';
+import 'package:projetofilmes/Screens/login/loginPage.dart';
 
 void main() {
   runApp(const MaterialApp(
