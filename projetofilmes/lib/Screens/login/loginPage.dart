@@ -12,8 +12,9 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
-  TextEditingController _username = TextEditingController();
-  TextEditingController _password = TextEditingController();
+
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   void initState() {
@@ -39,7 +40,6 @@ class _loginPageState extends State<loginPage> {
   }
 
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -180,7 +180,7 @@ class _loginPageState extends State<loginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegisterPage()),
+                              builder: (context) => const RegisterPage()),
                         );
                       },
                       child: const Text(

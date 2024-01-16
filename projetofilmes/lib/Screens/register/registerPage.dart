@@ -1,11 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -74,6 +84,7 @@ class RegisterPage extends StatelessWidget {
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
                       ),
+                      controller: _username,
                     ),
                   ),
                 ),
@@ -100,13 +111,14 @@ class RegisterPage extends StatelessWidget {
                         fillColor: Colors.white,
                         filled: true,
                         hintText: "Digite aqui",
-                        prefixIcon:
-                            Icon(Icons.person, color: Colors.deepPurpleAccent),
+                        prefixIcon: Icon(Icons.lock_person,
+                            color: Colors.deepPurpleAccent),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
                       ),
+                      controller: _password,
                     ),
                   ),
                 ),
@@ -133,11 +145,11 @@ class RegisterPage extends StatelessWidget {
                         fillColor: Colors.white,
                         filled: true,
                         hintText: "Digite aqui",
-                        prefixIcon:
-                        Icon(Icons.person, color: Colors.deepPurpleAccent),
+                        prefixIcon: Icon(Icons.lock_person,
+                            color: Colors.deepPurpleAccent),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
-                          BorderSide(color: Colors.deepPurpleAccent),
+                              BorderSide(color: Colors.deepPurpleAccent),
                         ),
                       ),
                     ),
