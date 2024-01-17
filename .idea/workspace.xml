@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ffb9fb8-af48-443e-b922-853ab65945ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/projetofilmes/lib/Screens/register/register_store.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projetofilmes/lib/Screens/login/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projetofilmes/lib/Screens/login/loginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projetofilmes/lib/Screens/register/registerPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projetofilmes/lib/Screens/register/registerPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Controller/PessoaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Controller/PessoaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Repository/PessoaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Repository/PessoaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/services/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/services/PessoaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +21,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/projetofilmes" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

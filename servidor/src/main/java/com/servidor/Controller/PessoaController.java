@@ -9,18 +9,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/pessoas")
+@RequestMapping("/usuarios")
 public class PessoaController {
 
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> verificarPessoa(@PathVariable Long id) {
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Pessoa> verificaIdPessoa(@PathVariable Long id) {
         Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
 
         if (pessoaOptional.isPresent()) {
             return ResponseEntity.ok(pessoaOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<String> verificaNomePessoa(@PathVariable String nome) {
+        Pessoa pessoaOptional = pessoaRepository.findByNome(nome);
+
+        if (!pessoaOptional.getNome().isEmpty()) {
+            return ResponseEntity.ok(pessoaOptional.getNome());
         } else {
             return ResponseEntity.notFound().build();
         }

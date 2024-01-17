@@ -8,5 +8,4 @@ import java.util.List;
 @Service
 public interface PessoaService {
 
-    List<Pessoa> getUsers();
 }

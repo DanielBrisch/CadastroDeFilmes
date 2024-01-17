@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projetofilmes/Screens/register/register_store.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -9,9 +10,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
-  final TextEditingController _username = TextEditingController();
-  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Center(
             child: Container(
               width: 300.0,
-              height: 570.0,
+              height: 500.0,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -67,13 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.deepPurpleAccent),
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25),
                   child: SizedBox(
                     width: 250,
                     height: 50,
                     child: TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
                         hintText: "Digite aqui",
@@ -84,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
                       ),
-                      controller: _username,
+                      controller: RegisterStore.user,
                     ),
                   ),
                 ),
@@ -101,8 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: SizedBox(
                     width: 400,
                     height: 50,
@@ -111,14 +109,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         fillColor: Colors.white,
                         filled: true,
                         hintText: "Digite aqui",
-                        prefixIcon: Icon(Icons.lock_person,
+                        prefixIcon: const Icon(Icons.lock_person,
                             color: Colors.deepPurpleAccent),
-                        enabledBorder: UnderlineInputBorder(
+                        enabledBorder: const UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
+                        errorText: RegisterStore.passWord.text.isEmpty
+                            ? 'Este campo é obrigatório.'
+                            : null,
                       ),
-                      controller: _password,
+                      controller: RegisterStore.passWord,
                     ),
                   ),
                 ),
@@ -135,13 +136,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25),
                   child: SizedBox(
                     width: 400,
                     height: 50,
                     child: TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
                         hintText: "Digite aqui",
@@ -152,11 +153,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
                       ),
+                      controller: RegisterStore.repeatPassWord,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       shadowColor:
@@ -165,30 +167,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           Colors.deepPurpleAccent),
                       elevation: MaterialStateProperty.all<double>(8.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                        await RegisterStore.getNomeByServidor();
+                    },
                     child: const Text(
-                      "Entrar",
+                      "Cadastrar",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
-                      );
-                    },
-                    child: const Text(
-                      "Register",
-                      style: TextStyle(
-                        color: Colors.deepPurpleAccent,
-                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),

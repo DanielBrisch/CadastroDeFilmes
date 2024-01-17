@@ -2,22 +2,29 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
+enum EmptyField {
+  User,
+  Password,
+  RepeatPassword,
+  None,
+}
+
 class RegisterStore {
 
-  TextEditingController nomeController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
+  static TextEditingController user = TextEditingController();
+  static TextEditingController passWord = TextEditingController();
+  static TextEditingController repeatPassWord = TextEditingController();
 
-  Future<void> cadastrarUsuario() async {
-    final url = Uri.parse('http://localhost:8080/api/pessoas');
+  static Future<bool> cadastrarUsuario() async {
+    final urlPost = Uri.parse('http://localhost:8080/usuarios/cadastrar');
 
-    // Substitua os dados abaixo pelos dados reais do usuário que você deseja adicionar
     final Map<String, dynamic> data = {
-      "nome": "Nome do Usuário",
-      "senha": "Senha do Usuário",
+      "nome": "$user",
+      "senha": "$passWord",
     };
 
     final response = await http.post(
-      url,
+      urlPost,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -25,14 +32,48 @@ class RegisterStore {
     );
 
     if (response.statusCode == 200) {
-      print('Usuário cadastrado com sucesso!');
+      return true;
     } else {
-      print('Falha ao cadastrar usuário. Status code: ${response.statusCode}');
-      print('Corpo da resposta: ${response.body}');
+      return false;
     }
   }
 
-  void main() {
-    cadastrarUsuario();
+  static Future<bool> isValidUser() async {
+    if (passWord == repeatPassWord) {
+      cadastrarUsuario();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<EmptyField> isEmptyTextField() async {
+    if (user.text.isEmpty) {
+      return EmptyField.User;
+    } else if (passWord.text.isEmpty) {
+      return EmptyField.Password;
+    } else if (repeatPassWord.text.isEmpty) {
+      return EmptyField.RepeatPassword;
+    } else {
+      return EmptyField.None;
+    }
+  }
+
+  static Future<String> getNomeByServidor() async {
+    final urlGet = Uri.parse('http://localhost:8080/usuarios/nome/$user');
+
+    final response = await http.get(
+      urlGet,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['nome'];
+    } else {
+      print('Erro na solicitação: ${response.statusCode}');
+      return '';
+    }
   }
 }
