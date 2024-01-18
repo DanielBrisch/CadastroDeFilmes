@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:projetofilmes/serverInfo.dart';
 
 enum EmptyField {
   User,
@@ -15,12 +16,12 @@ class RegisterStore {
   static TextEditingController passWord = TextEditingController();
   static TextEditingController repeatPassWord = TextEditingController();
 
-  static Future<bool> cadastrarUsuario() async {
-    final urlPost = Uri.parse('http://localhost:8080/usuarios/cadastrar');
+  static Future<void> cadastrarUsuario() async {
+    final urlPost = Uri.parse('${ServerInfo.hostAPI}/usuarios/cadastrar');
 
     final Map<String, dynamic> data = {
-      "nome": "$user",
-      "senha": "$passWord",
+      "nome": user.text,
+      "senha": passWord.text,
     };
 
     final response = await http.post(
@@ -30,21 +31,13 @@ class RegisterStore {
       },
       body: jsonEncode(data),
     );
-
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   static Future<bool> isValidUser() async {
-    if (passWord == repeatPassWord) {
-      cadastrarUsuario();
-      return true;
-    } else {
-      return false;
-    }
+    if (await getNomeByServidor() == true) {
+        return passWord.text == repeatPassWord.text;
+      }
+    return false;
   }
 
   static Future<EmptyField> isEmptyTextField() async {
@@ -59,21 +52,18 @@ class RegisterStore {
     }
   }
 
-  static Future<String> getNomeByServidor() async {
-    final urlGet = Uri.parse('http://localhost:8080/usuarios/nome/$user');
+  static Future<bool> getNomeByServidor() async {
+    if (user.text.isNotEmpty) {
+      final urlGet = Uri.parse('${ServerInfo.hostAPI}/usuarios/nome/${user.text}');
 
-    final response = await http.get(
-      urlGet,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
+      try {
+        final response = await http.get(urlGet);
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body)['nome'];
-    } else {
-      print('Erro na solicitação: ${response.statusCode}');
-      return '';
+        return response.statusCode != 200;
+      } catch (error) {
+        return false;
+      }
     }
+    return false;
   }
 }

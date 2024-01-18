@@ -30,15 +30,26 @@ public class PessoaController {
     public ResponseEntity<String> verificaNomePessoa(@PathVariable String nome) {
         Pessoa pessoaOptional = pessoaRepository.findByNome(nome);
 
-        if (!pessoaOptional.getNome().isEmpty()) {
+        if (pessoaOptional != null && pessoaOptional.getNome() != null && !pessoaOptional.getNome().isEmpty()) {
             return ResponseEntity.ok(pessoaOptional.getNome());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+
     @PostMapping("/cadastrar")
     public Pessoa cadastrarPessoa(@RequestBody Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
+    }
+
+    @GetMapping("/getUsuario/{usuario}/{senha}")
+    public ResponseEntity<Pessoa> getUsuarioExistente(@PathVariable String nome, @PathVariable String senha) {
+        Pessoa getPessoa = pessoaRepository.findByNomeAndSenha(nome, senha);
+
+        if (getPessoa != null) {
+            return ResponseEntity.ok(getPessoa);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

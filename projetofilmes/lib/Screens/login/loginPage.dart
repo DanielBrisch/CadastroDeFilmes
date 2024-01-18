@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../register/registerPage.dart';
+import 'login_store.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({super.key});
@@ -138,6 +139,7 @@ class _loginPageState extends State<loginPage> {
                       width: size.width * 0.8,
                       height: 50,
                       child: TextField(
+                        obscureText: true,
                         decoration: const InputDecoration(
                           fillColor: Colors.white,
                           filled: true,
@@ -163,7 +165,9 @@ class _loginPageState extends State<loginPage> {
                             Colors.deepPurpleAccent),
                         elevation: MaterialStateProperty.all<double>(8.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        LoginStore.getUserExist(_username.text, _password.text);
+                      },
                       child: const Text(
                         "Entrar",
                         style: TextStyle(

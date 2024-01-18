@@ -105,6 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 400,
                     height: 50,
                     child: TextField(
+                      obscureText: true,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -142,6 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 400,
                     height: 50,
                     child: TextField(
+                      obscureText: true,
                       decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -168,7 +170,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       elevation: MaterialStateProperty.all<double>(8.0),
                     ),
                     onPressed: () async {
-                        await RegisterStore.getNomeByServidor();
+                      if (await RegisterStore.isValidUser()) {
+                          RegisterStore.cadastrarUsuario();
+                      }
                     },
                     child: const Text(
                       "Cadastrar",
