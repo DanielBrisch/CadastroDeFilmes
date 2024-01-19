@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-
+import '../home/home_page.dart';
 import '../register/registerPage.dart';
 import 'login_store.dart';
 
@@ -16,29 +14,6 @@ class _loginPageState extends State<loginPage> {
 
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    initDatabase();
-  }
-
-  late Database database;
-
-  Future<void> initDatabase() async {
-    final databasePath = await getDatabasesPath();
-    final path = join(databasePath, 'DataBase.db');
-
-    database = await openDatabase(
-      path,
-      version: 1,
-      onCreate: (Database db, int version) async {
-        await db.execute(
-          "CREATE TABLE USERS(ID INTEGER PRIMARY KEY, USERNAME TEXT, PASSWORD INTEGER)",
-        );
-      },
-    );
-  }
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -166,7 +141,13 @@ class _loginPageState extends State<loginPage> {
                         elevation: MaterialStateProperty.all<double>(8.0),
                       ),
                       onPressed: () async {
-                        LoginStore.getUserExist(_username.text, _password.text);
+                        if (await LoginStore.getUserExist(_username.text, _password.text)) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const homePage()),
+                          );
+                        }
                       },
                       child: const Text(
                         "Entrar",

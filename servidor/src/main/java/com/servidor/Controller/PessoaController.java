@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,8 +44,8 @@ public class PessoaController {
         return pessoaRepository.save(pessoa);
     }
 
-    @GetMapping("/getUsuario/{usuario}/{senha}")
-    public ResponseEntity<Pessoa> getUsuarioExistente(@PathVariable String nome, @PathVariable String senha) {
+    @GetMapping("/getUsuario/{nome}/{senha}")
+    public ResponseEntity<Pessoa> getUsuarioExistente(@PathVariable("nome") String nome, @PathVariable("senha") String senha) {
         Pessoa getPessoa = pessoaRepository.findByNomeAndSenha(nome, senha);
 
         if (getPessoa != null) {

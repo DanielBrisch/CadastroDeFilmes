@@ -11,6 +11,8 @@ class LoginStore {
 
     if (response.statusCode == 200) {
       response.body;
+      ServerInfo.user = user;
+      return true;
     }
     return false;
   }

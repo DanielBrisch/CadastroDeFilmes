@@ -24,13 +24,7 @@ class RegisterStore {
       "senha": passWord.text,
     };
 
-    final response = await http.post(
-      urlPost,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(data),
-    );
+    final response = await http.post(urlPost, body: jsonEncode(data));
   }
 
   static Future<bool> isValidUser() async {
