@@ -16,6 +16,10 @@ class RegisterStore {
   static TextEditingController passWord = TextEditingController();
   static TextEditingController repeatPassWord = TextEditingController();
 
+  static bool loginError = false;
+  static bool passWordError = false;
+  static bool repeatPassWordError = false;
+
   static Future<void> cadastrarUsuario() async {
     final urlPost = Uri.parse('${ServerInfo.hostAPI}/usuarios/cadastrar');
 

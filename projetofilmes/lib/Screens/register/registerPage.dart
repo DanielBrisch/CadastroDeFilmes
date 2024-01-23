@@ -14,6 +14,11 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    bool loginError = false;
+    bool passWordError = false;
+    bool repeatPassWordError = false;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -116,9 +121,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderSide:
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
-                        errorText: RegisterStore.passWord.text.isEmpty
-                            ? 'Este campo é obrigatório.'
-                            : null,
+                        errorText: !loginError
+                            ? 'Este campo é obrigatório.',
                       ),
                       controller: RegisterStore.passWord,
                     ),
@@ -138,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: SizedBox(
                     width: 400,
                     height: 50,

@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ffb9fb8-af48-443e-b922-853ab65945ab" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Controller/PessoaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Controller/PessoaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Repository/PessoaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/servidor/src/main/java/com/servidor/Repository/PessoaRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,12 +75,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/projetofilmes/lib/Screens/register/registerPage.dart</url>
-          <line>172</line>
+          <line>176</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/projetofilmes/lib/Screens/register/registerPage.dart</url>
-          <line>173</line>
+          <line>177</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
