@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projetofilmes/serverInfo.dart';
 
+import '../movies_register/mv_register_page.dart';
+
 class homePage extends StatelessWidget {
   const homePage({super.key});
 
@@ -12,11 +14,12 @@ class homePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
-        title: Text('Bem Vindo de volta ${ServerInfo.user}',
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        title: Text(
+          'Bem Vindo de volta ${ServerInfo.user}',
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -26,6 +29,22 @@ class homePage extends StatelessWidget {
           color: Colors.white,
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const MV_RegisterPage()),
+          );
+        },
+        backgroundColor: Colors.deepPurpleAccent,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projetofilmes/Screens/register/register_store.dart';
 
+import '../../Dialog/OK_dialog.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -15,9 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    bool loginError = false;
-    bool passWordError = false;
-    bool repeatPassWordError = false;
+
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -111,18 +111,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 50,
                     child: TextField(
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
                         hintText: "Digite aqui",
-                        prefixIcon: const Icon(Icons.lock_person,
+                        prefixIcon: Icon(Icons.lock_person,
                             color: Colors.deepPurpleAccent),
-                        enabledBorder: const UnderlineInputBorder(
+                        enabledBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.deepPurpleAccent),
                         ),
-                        errorText: !loginError
-                            ? 'Este campo é obrigatório.',
                       ),
                       controller: RegisterStore.passWord,
                     ),
@@ -174,8 +172,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       elevation: MaterialStateProperty.all<double>(8.0),
                     ),
                     onPressed: () async {
+                      if (RegisterStore.user.text.isEmpty ||
+                          RegisterStore.passWord.text.isEmpty ||
+                          RegisterStore.repeatPassWord.text.isEmpty ) {
+                        DialogOK.showDialogOk('ATENÇÃO',
+                            'Por favor informe todos os campos necessarios', context);
+                        return;
+                      }
+                      if (RegisterStore.passWord != RegisterStore.repeatPassWord) {
+                        DialogOK.showDialogOk('ATENÇÃO',
+                            'As senhas não são iguais', context);
+                        return;
+                      }
                       if (await RegisterStore.isValidUser()) {
-                          RegisterStore.cadastrarUsuario();
+                        RegisterStore.cadastrarUsuario();
                       }
                     },
                     child: const Text(

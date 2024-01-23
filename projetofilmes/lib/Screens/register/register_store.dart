@@ -3,13 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:projetofilmes/serverInfo.dart';
 
-enum EmptyField {
-  User,
-  Password,
-  RepeatPassword,
-  None,
-}
-
 class RegisterStore {
 
   static TextEditingController user = TextEditingController();
@@ -28,7 +21,7 @@ class RegisterStore {
       "senha": passWord.text,
     };
 
-    final response = await http.post(urlPost, body: jsonEncode(data));
+    await http.post(urlPost, body: jsonEncode(data));
   }
 
   static Future<bool> isValidUser() async {
@@ -36,18 +29,6 @@ class RegisterStore {
         return passWord.text == repeatPassWord.text;
       }
     return false;
-  }
-
-  static Future<EmptyField> isEmptyTextField() async {
-    if (user.text.isEmpty) {
-      return EmptyField.User;
-    } else if (passWord.text.isEmpty) {
-      return EmptyField.Password;
-    } else if (repeatPassWord.text.isEmpty) {
-      return EmptyField.RepeatPassword;
-    } else {
-      return EmptyField.None;
-    }
   }
 
   static Future<bool> getNomeByServidor() async {
@@ -64,4 +45,5 @@ class RegisterStore {
     }
     return false;
   }
+
 }
