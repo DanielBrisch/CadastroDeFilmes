@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
+import '../../Dialog/OK_dialog.dart';
 import 'mv_register_store.dart';
 
 class MV_RegisterPage extends StatefulWidget {
   const MV_RegisterPage({super.key});
+
 
   @override
   State<MV_RegisterPage> createState() => _MV_RegisterPageState();
@@ -15,15 +19,17 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    List<bool> selectedYears = <bool>[false, false, false, false, false];
+    File? imagemSelecionada;
+    final picker = ImagePicker();
 
-    const List<Widget> idades = <Widget>[
-      Text('10'),
-      Text('12'),
-      Text('14'),
-      Text('16'),
-      Text('18'),
-    ];
+    Future escolherImagem() async {
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
+      setState(() {
+        if (imagemSelecionada != null) {
+          imagemSelecionada = File(pickedFile!.path);
+        }
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +67,23 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
                 width: 220.0,
                 height: 250.0,
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await escolherImagem();
+                    if (await imagemSelecionada != null) {
+                      Container(
+                        width: 220,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: FileImage(imagemSelecionada!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    } else {
+                      DialogOK.showDialogOk("ATENÇÃO", "Login ou Senha invalidos", context);
+                    }
+                  },
                   backgroundColor: Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -195,21 +217,93 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                    //nao funciona ainda (mas deveria
-                  ToggleButtons(
-                    isSelected: selectedYears,
-                    onPressed: (int index) {
-                      setState(() {
-                        for (int buttonIndex = 0; buttonIndex < selectedYears.length; buttonIndex++) {
-                          if (buttonIndex == index) {
-                            selectedYears[buttonIndex] = true;
-                          } else {
-                            selectedYears[buttonIndex] = false;
-                          }
-                        }
-                      });
-                    },
-                    children: idades
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [ FloatingActionButton(
+                        onPressed: () {
+                          MV_RegisterStore.restricao = 0;
+                        },
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          'L',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          MV_RegisterStore.restricao = 10;
+                        },
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.lightBlue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          '10',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          MV_RegisterStore.restricao = 12;
+                        },
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.yellow,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          '12',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          MV_RegisterStore.restricao = 14;
+                        },
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.orange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          '14',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          MV_RegisterStore.restricao = 16;
+                        },
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          '16',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          MV_RegisterStore.restricao = 18;
+                        },
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          '18',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
