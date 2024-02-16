@@ -15,7 +15,7 @@ public class FilmesController {
     @Autowired
     private FilmesRepository filmesRepository;
 
-    @PostMapping("/cadastro")
+    @PostMapping("/cadastrar")
     public Filme cadastraFilme(@RequestBody Filme filme) {
         return filmesRepository.save(filme);
     }

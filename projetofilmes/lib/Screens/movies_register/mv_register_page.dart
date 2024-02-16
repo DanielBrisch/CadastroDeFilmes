@@ -9,27 +9,17 @@ import 'mv_register_store.dart';
 class MV_RegisterPage extends StatefulWidget {
   const MV_RegisterPage({super.key});
 
-
   @override
   State<MV_RegisterPage> createState() => _MV_RegisterPageState();
 }
 
 class _MV_RegisterPageState extends State<MV_RegisterPage> {
+  File? imagemSelecionada;
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    File? imagemSelecionada;
-    final picker = ImagePicker();
-
-    Future escolherImagem() async {
-      final pickedFile = await picker.getImage(source: ImageSource.gallery);
-      setState(() {
-        if (imagemSelecionada != null) {
-          imagemSelecionada = File(pickedFile!.path);
-        }
-      });
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -63,36 +53,19 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
                       ),
                     ],
                   )),
-              SizedBox(
-                width: 220.0,
-                height: 250.0,
-                child: FloatingActionButton(
-                  onPressed: () async {
-                    await escolherImagem();
-                    if (await imagemSelecionada != null) {
-                      Container(
-                        width: 220,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: FileImage(imagemSelecionada!),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    } else {
-                      DialogOK.showDialogOk("ATENÇÃO", "Login ou Senha invalidos", context);
-                    }
-                  },
-                  backgroundColor: Colors.grey,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: const Icon(Icons.camera_alt),
-                ),
-              ),
+              Container(
+                  width: 220.0,
+                  height: 250.0,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      escolherImagem();
+                    },
+                    child: imagemSelecionada != null
+                        ? Image.file(imagemSelecionada!)
+                        : Icon(Icons.camera_alt),
+                  )),
               const Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 20),
+                padding: EdgeInsets.only(top: 25, bottom: 15),
                 child: Text('*Clique para adicionar a capa do filme*'),
               ),
               Row(
@@ -219,7 +192,8 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [ FloatingActionButton(
+                    children: [
+                      FloatingActionButton(
                         onPressed: () {
                           MV_RegisterStore.restricao = 0;
                         },
@@ -328,5 +302,13 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
         ),
       ),
     );
+  }
+
+  Future<void> escolherImagem() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      imagemSelecionada = pickedFile != null ? File(pickedFile.path) : null;
+    });
+    await Future.delayed(const Duration(seconds: 1));
   }
 }
