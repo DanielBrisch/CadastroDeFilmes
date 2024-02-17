@@ -16,6 +16,13 @@ class MV_RegisterPage extends StatefulWidget {
 class _MV_RegisterPageState extends State<MV_RegisterPage> {
   File? imagemSelecionada;
   final picker = ImagePicker();
+  List<int> stars = [1, 2, 3, 4, 5];
+
+  int start1 = 1;
+  int start2 = 2;
+  int start3 = 3;
+
+  Color colorStar = Colors.grey;
 
   @override
   Widget build(BuildContext context) {
@@ -72,54 +79,59 @@ class _MV_RegisterPageState extends State<MV_RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
+                    icon: Icon(Icons.star, color: colorStar, size: 50),
                     onPressed: () {
-                      MV_RegisterStore.star = 1;
+                      setState(() {
+                        MV_RegisterStore.star = 1;
+                        colorStar = MV_RegisterStore.star > start1
+                            ? Colors.yellow
+                            : Colors.grey;
+                      });
                     },
-                    icon: const Icon(
-                      Icons.star_rounded,
-                      size: 50,
-                    ),
-                    color: Colors.grey,
                   ),
                   IconButton(
+                    icon: Icon(Icons.star, color: colorStar, size: 50),
                     onPressed: () {
-                      MV_RegisterStore.star = 2;
+                      setState(() {
+                        MV_RegisterStore.star = 2;
+                        colorStar = MV_RegisterStore.star > start2
+                            ? Colors.yellow
+                            : Colors.grey;
+                      });
                     },
-                    icon: const Icon(
-                      Icons.star_rounded,
-                      size: 50,
-                    ),
-                    color: Colors.grey,
                   ),
                   IconButton(
+                    icon: Icon(Icons.star, color: colorStar, size: 50),
                     onPressed: () {
-                      MV_RegisterStore.star = 3;
+                      setState(() {
+                        MV_RegisterStore.star = 3;
+                        colorStar = MV_RegisterStore.star > start3
+                            ? Colors.yellow
+                            : Colors.grey;
+                      });
                     },
-                    icon: const Icon(
-                      Icons.star_rounded,
-                      size: 50,
-                    ),
-                    color: Colors.grey,
                   ),
                   IconButton(
+                    icon: Icon(Icons.star, color: colorStar, size: 50),
                     onPressed: () {
-                      MV_RegisterStore.star = 4;
+                      setState(() {
+                        MV_RegisterStore.star = 5;
+                        colorStar = MV_RegisterStore.star > stars.indexOf(3)
+                            ? Colors.yellow
+                            : Colors.grey;
+                      });
                     },
-                    icon: const Icon(
-                      Icons.star_rounded,
-                      size: 50,
-                    ),
-                    color: Colors.grey,
                   ),
                   IconButton(
+                    icon: Icon(Icons.star, color: colorStar, size: 50),
                     onPressed: () {
-                      MV_RegisterStore.star = 5;
+                      setState(() {
+                        MV_RegisterStore.star = 5;
+                        colorStar = MV_RegisterStore.star > stars.indexOf(4)
+                            ? Colors.yellow
+                            : Colors.grey;
+                      });
                     },
-                    icon: const Icon(
-                      Icons.star_rounded,
-                      size: 50,
-                    ),
-                    color: Colors.grey,
                   ),
                 ],
               ),
