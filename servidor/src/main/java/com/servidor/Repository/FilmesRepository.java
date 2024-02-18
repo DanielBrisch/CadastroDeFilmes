@@ -1,8 +1,7 @@
 package com.servidor.Repository;
 
-import com.servidor.entities.Filme;
-import com.servidor.entities.Pessoa;
+import com.servidor.entities.Filmes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FilmesRepository extends JpaRepository<Filme, Long> {
+public interface FilmesRepository extends JpaRepository<Filmes, Long> {
 }

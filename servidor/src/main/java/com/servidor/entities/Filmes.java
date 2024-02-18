@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Blob;
-
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
-public class Filme {
+public class Filmes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +26,11 @@ public class Filme {
     private int restricao;
 
     @Column(name = "CLASSIFICACAO")
-    private Double classificacao;
+    private int classificacao;
 
     @Column(name = "CAPAFILME", nullable = false)
-    private Blob capaFilme;
+    private byte[] capaFilme;
 
-    public Filme() {
+    public Filmes() {
     }
 }
