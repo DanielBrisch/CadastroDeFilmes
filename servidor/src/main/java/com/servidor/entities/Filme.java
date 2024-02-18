@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class Filmes {
+public class Filme {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,6 @@ public class Filmes {
     @Column(name = "CAPAFILME", nullable = false)
     private byte[] capaFilme;
 
-    public Filmes() {
+    public Filme() {
     }
 }

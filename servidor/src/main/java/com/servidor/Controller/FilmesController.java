@@ -1,12 +1,11 @@
 package com.servidor.Controller;
 
 import com.servidor.Repository.FilmesRepository;
-import com.servidor.entities.Filmes;
+import com.servidor.entities.Filme;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/filmes")
@@ -16,7 +15,12 @@ public class FilmesController {
     private FilmesRepository filmesRepository;
 
     @PostMapping("/cadastrar")
-    public Filmes cadastraFilme(@RequestBody Filmes filmes) {
-        return filmesRepository.save(filmes);
+    public Filme cadastraFilme(@RequestBody Filme filme) {
+        return filmesRepository.save(filme);
+    }
+
+    @GetMapping("/allFilmes")
+    public List<Filme> getFilmes() {
+        return filmesRepository.findAll();
     }
 }
